@@ -2,8 +2,10 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const passport = require("passport");
 
 const User = require("./models/User");
+const { strategy } = require("./config/jwtConfig");
 
 // configure cors
 app.use(cors());
@@ -29,6 +31,9 @@ User.sync()
     console.log("User table created successfully");
   })
   .catch((err) => console.error(`User table creation failed ->>> ${err}`));
+
+// use the passport strategy
+passport.use("strategy", strategy);
 
 // test app
 app.get("/", (req, res) => {
