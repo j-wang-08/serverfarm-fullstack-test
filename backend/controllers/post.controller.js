@@ -8,7 +8,7 @@ const create = (req, res) => {
     res.status(400).send({ message: "Title or content cannot be empty" });
   }
 
-  const userId = req.userData.id;
+  const userId = req.userData.user.id;
 
   // Create a post
   const post = new Post({
@@ -29,7 +29,7 @@ const create = (req, res) => {
 
 // Retrieve all Posts
 const findAll = (req, res) => {
-  const userId = req.userData.id;
+  const userId = req.userData.user.id;
 
   Post.find({ userId: userId })
     .then((data) => res.send(data))
@@ -42,7 +42,7 @@ const findAll = (req, res) => {
 
 // Find a post with post id and user id
 const findOne = (req, res) => {
-  const userId = req.userData.id;
+  const userId = req.userData.user.id;
   const postId = req.params.id;
 
   Post.findById(postId)
@@ -72,9 +72,13 @@ const update = (req, res) => {
   }
 
   const postId = req.params.id;
-  const userId = req.userData.id;
+  const userId = req.userData.user.id;
 
-  Post.findByIdAndUpdate(postId, req.body, { useFindAndModify: false })
+  Post.findByIdAndUpdate(
+    postId,
+    { ...req.body, userId },
+    { useFindAndModify: false }
+  )
     .then((data) => {
       if (!data) {
         res.status(404).send({
@@ -94,7 +98,7 @@ const update = (req, res) => {
 // Delete post with post id
 const deleteOne = (req, res) => {
   const postId = req.params.id;
-  const userId = req.userData.id;
+  const userId = req.userData.user.id;
 
   Post.findByIdAndRemove(postId, { useFindAndModify: false })
     .then((data) => {
