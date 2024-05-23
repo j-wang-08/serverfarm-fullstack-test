@@ -1,5 +1,5 @@
 const { Sequelize, DataTypes } = require("sequelize");
-const mysqlDb = require("../config/database/mysql");
+const mysqlDb = require("../config/database/mysql.conf");
 
 const User = mysqlDb.define("user", {
   email: {

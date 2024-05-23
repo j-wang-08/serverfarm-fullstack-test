@@ -16,7 +16,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // create mysql db
-const mysqlDb = require("./config/database/mysql");
+const mysqlDb = require("./config/database/mysql.conf");
 
 // test mysql connect
 mysqlDb
