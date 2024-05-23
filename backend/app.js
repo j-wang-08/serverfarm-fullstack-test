@@ -5,6 +5,8 @@ const cors = require("cors");
 const passport = require("passport");
 
 const authRoutes = require("./routes/auth");
+const postRoutes = require("./routes/post");
+const checkAuth = require("./middleware/checkAuth");
 const User = require("./models/User");
 const mongodb = require("./models");
 const { strategy } = require("./config/jwt.conf");
@@ -49,6 +51,9 @@ passport.use("strategy", strategy);
 
 // auth routes
 app.use("/api/auth", authRoutes);
+
+// post routes
+app.use("/api/posts", checkAuth, postRoutes);
 
 // test app
 app.get("/", (req, res) => {
