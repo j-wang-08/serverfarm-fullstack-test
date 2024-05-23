@@ -6,6 +6,7 @@ const passport = require("passport");
 
 const authRoutes = require("./routes/auth");
 const User = require("./models/User");
+const mongodb = require("./models");
 const { strategy } = require("./config/jwt.conf");
 
 // configure cors
@@ -25,6 +26,16 @@ mysqlDb
     console.log("Mysql database connected...");
   })
   .catch((err) => console.error(`Mysql Connect Error ->>> ${err}`));
+
+// test mongodb connect
+mongodb.mongoose
+  .connect(mongodb.url)
+  .then(() => {
+    console.log("Mongodb database connected...");
+  })
+  .catch((err) => {
+    console.log(`Mongodb Connect Error ->>> ${err}`);
+  });
 
 // create User table
 User.sync()
