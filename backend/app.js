@@ -6,7 +6,7 @@ const passport = require("passport");
 
 const authRoutes = require("./routes/auth");
 const User = require("./models/User");
-const { strategy } = require("./config/jwtConfig");
+const { strategy } = require("./config/jwt.conf");
 
 // configure cors
 app.use(cors());
