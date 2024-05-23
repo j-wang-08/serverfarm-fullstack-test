@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const passport = require("passport");
 
+const authRoutes = require("./routes/auth");
 const User = require("./models/User");
 const { strategy } = require("./config/jwtConfig");
 
@@ -34,6 +35,9 @@ User.sync()
 
 // use the passport strategy
 passport.use("strategy", strategy);
+
+// auth routes
+app.use("/auth", authRoutes);
 
 // test app
 app.get("/", (req, res) => {
