@@ -37,7 +37,7 @@ User.sync()
 passport.use("strategy", strategy);
 
 // auth routes
-app.use("/auth", authRoutes);
+app.use("/api/auth", authRoutes);
 
 // test app
 app.get("/", (req, res) => {
