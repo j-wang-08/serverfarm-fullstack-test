@@ -1,5 +1,8 @@
 const mongodb = require("../models");
 const Post = mongodb.posts;
+const producer = require("../services/kafka");
+
+const topic = process.env.KAFKA_TOPIC || "serverfarm_new_post";
 
 // Create and save a new post
 const create = (req, res) => {
@@ -19,9 +22,24 @@ const create = (req, res) => {
 
   post
     .save()
-    .then((data) =>
-      res.status(200).send({ data, message: "New post created successfully" })
-    )
+    .then((data) => {
+      // Send message to kafka
+      const payloads = {
+        topic,
+        messages: JSON.stringify(data),
+        partition: 0,
+      };
+
+      producer.send(payloads, (err, data) => {
+        if (err) {
+          console.error("Failed to send message to Kafka: ", err);
+        } else {
+          console.log("Message sent to Kafka: ", data);
+        }
+      });
+
+      res.status(200).send({ data, message: "New post created successfully" });
+    })
     .catch((err) =>
       res.status(500).send({
         message: err.message || "Some error occurred while creating a new Post",
