@@ -7,6 +7,7 @@ import Home from "./components/Home";
 import RegisterForm from "./components/RegisterForm";
 import LoginForm from "./components/LoginForm";
 import CreatePostForm from "./components/CreatePostForm";
+import Posts from "./components/Posts";
 
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
@@ -66,7 +67,7 @@ const App = () => {
           <Route
             exact
             path="/posts"
-            element={isLoggedIn ? <>Home</> : <Navigate to="/login" />}
+            element={isLoggedIn ? <Posts /> : <Navigate to="/login" />}
           />
           <Route
             exact
