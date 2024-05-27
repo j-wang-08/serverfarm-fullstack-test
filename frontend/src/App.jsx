@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Link, Navigate } from "react-router-dom";
 import AuthService from "./services/auth.service";
 import RegisterForm from "./components/RegisterForm";
 import LoginForm from "./components/LoginForm";
@@ -58,7 +58,11 @@ const App = () => {
       <div className="">
         <Routes>
           <Route exact path="/" element={<>Welcome</>} />
-          <Route exact path="/home" element={<>Home</>} />
+          <Route
+            exact
+            path="/home"
+            element={isLoggedIn ? <>Home</> : <Navigate to="/login" />}
+          />
           <Route exact path="/login" element={<LoginForm />} />
           <Route exact path="/register" element={<RegisterForm />} />
         </Routes>
