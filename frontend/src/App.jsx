@@ -61,7 +61,7 @@ const App = () => {
         </div>
       </nav>
 
-      <div className="">
+      <div>
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route
