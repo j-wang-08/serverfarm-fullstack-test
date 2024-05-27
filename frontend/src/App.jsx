@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import AuthService from "./services/auth.service";
 
-import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
 const App = () => {
@@ -20,33 +19,33 @@ const App = () => {
 
   return (
     <div>
-      <nav className="navbar navbar-expand navbar-dark bg-dark">
-        <Link to={"/"} className="navbar-brand">
+      <nav className="">
+        <Link to={"/"} className="">
           ServerFarm
         </Link>
-        <ul className="navbar-nav mr-auto">
-          <li className="nav-item">
-            <Link to={"/home"} className="nav-link">
+        <ul className="">
+          <li className="">
+            <Link to={"/home"} className="">
               Home
             </Link>
           </li>
         </ul>
-        <ul className="navbar-nav ml-auto">
+        <ul className="">
           {isLoggedIn ? (
-            <li className="nav-item">
-              <Link to={"/login"} className="nav-link" onClick={logOut}>
+            <li className="">
+              <Link to={"/login"} className="" onClick={logOut}>
                 Logout
               </Link>
             </li>
           ) : (
             <>
-              <li className="nav-item">
-                <Link to={"/login"} className="nav-link">
+              <li className="">
+                <Link to={"/login"} className="">
                   Login
                 </Link>
               </li>
               <li className="nav-item">
-                <Link to={"/register"} className="nav-link">
+                <Link to={"/register"} className="">
                   Register
                 </Link>
               </li>
@@ -55,7 +54,7 @@ const App = () => {
         </ul>
       </nav>
 
-      <div className="container mt-3">
+      <div className="">
         <Routes>
           <Route exact path="/" element={<>Welcome</>} />
           <Route exact path="/home" element={<>Home</>} />
