@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import AuthService from "../services/auth.service";
 
 const RegisterForm = () => {
+  const navigate = useNavigate();
   const [formState, setFormState] = useState({
     username: "",
     email: "",
@@ -61,7 +63,10 @@ const RegisterForm = () => {
         email: formState.email,
         password: formState.password,
       });
-      console.log("res: ", res);
+
+      if (res.status === 200 && res.statusText === "OK") {
+        navigate("/login");
+      }
     }
   };
 

@@ -2,7 +2,9 @@ import { useEffect, useState } from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import AuthService from "./services/auth.service";
 import RegisterForm from "./components/RegisterForm";
+import { ToastContainer } from "react-toastify";
 
+import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 
 const App = () => {
@@ -27,9 +29,7 @@ const App = () => {
         <div className="flex justify-between items-center flex-grow">
           <ul>
             <li>
-              <Link to={"/home"}>
-                Home
-              </Link>
+              <Link to={"/home"}>Home</Link>
             </li>
           </ul>
 
@@ -43,14 +43,10 @@ const App = () => {
             ) : (
               <>
                 <li className="">
-                  <Link to={"/login"}>
-                    Login
-                  </Link>
+                  <Link to={"/login"}>Login</Link>
                 </li>
                 <li className="">
-                  <Link to={"/register"}>
-                    Register
-                  </Link>
+                  <Link to={"/register"}>Register</Link>
                 </li>
               </>
             )}
@@ -66,6 +62,8 @@ const App = () => {
           <Route exact path="/register" element={<RegisterForm />} />
         </Routes>
       </div>
+
+      <ToastContainer />
     </div>
   );
 };
