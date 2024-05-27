@@ -1,5 +1,7 @@
 import axios from "axios";
 import { toast } from "react-toastify";
+import { store } from "../store/auth";
+import { setToken, clearToken } from "../features/auth/authSlice";
 
 const API_URL =
   process.env.REACT_APP_BACKEND_API_URL || "http://localhost:5000/api";
@@ -38,6 +40,7 @@ const login = ({ email, password }) => {
       toast.success(res.data.message);
       if (res.data.token) {
         localStorage.setItem("token", res.data.token);
+        store.dispatch(setToken(res.data.token));
       }
       return res;
     })
@@ -53,6 +56,7 @@ const login = ({ email, password }) => {
 
 const logout = () => {
   localStorage.removeItem("token");
+  store.dispatch(clearToken());
 };
 
 const AuthService = {

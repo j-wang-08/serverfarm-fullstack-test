@@ -4,21 +4,21 @@ import AuthService from "./services/auth.service";
 import RegisterForm from "./components/RegisterForm";
 import LoginForm from "./components/LoginForm";
 import { ToastContainer } from "react-toastify";
+import { useSelector } from "react-redux";
 
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 
 const App = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const token = useSelector((state) => state.auth.token);
+  const [isLoggedIn, setIsLoggedIn] = useState(token !== null);
 
   useEffect(() => {
-    let token = localStorage.getItem("token");
-    if (token) setIsLoggedIn(true);
-  }, []);
+    setIsLoggedIn(token !== null);
+  }, [token]);
 
   const logOut = () => {
     AuthService.logout();
-    setIsLoggedIn(false);
   };
 
   return (
