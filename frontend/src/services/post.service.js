@@ -54,7 +54,11 @@ const createNewPost = ({ title, content }) => {
     })
     .catch((err) => {
       console.log("error: ", err);
-      toast.error(err.message);
+      if (err.response.status === 500 || err.response.status === 400) {
+        toast.warn(err.response.data.message);
+      } else {
+        toast.error(err.message);
+      }
     });
 };
 

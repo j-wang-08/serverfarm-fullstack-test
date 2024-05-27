@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { Routes, Route, Link, Navigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { ToastContainer } from "react-toastify";
 import AuthService from "./services/auth.service";
 import RegisterForm from "./components/RegisterForm";
 import LoginForm from "./components/LoginForm";
-import { ToastContainer } from "react-toastify";
-import { useSelector } from "react-redux";
+import CreatePostForm from "./components/CreatePostForm";
 
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
@@ -69,7 +70,7 @@ const App = () => {
           <Route
             exact
             path="/posts/create"
-            element={isLoggedIn ? <>Create Post</> : <Navigate to="/login" />}
+            element={isLoggedIn ? <CreatePostForm /> : <Navigate to="/login" />}
           />
           <Route exact path="/login" element={<LoginForm />} />
           <Route exact path="/register" element={<RegisterForm />} />
