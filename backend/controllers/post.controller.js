@@ -19,7 +19,9 @@ const create = (req, res) => {
 
   post
     .save()
-    .then((data) => res.send(data))
+    .then((data) =>
+      res.status(200).send({ data, message: "New post created successfully" })
+    )
     .catch((err) =>
       res.status(500).send({
         message: err.message || "Some error occurred while creating a new Post",
@@ -32,7 +34,7 @@ const findAll = (req, res) => {
   const userId = req.userData.user.id;
 
   Post.find({ userId: userId })
-    .then((data) => res.send(data))
+    .then((data) => res.status(200).send(data))
     .catch((err) =>
       res.status(500).send({
         message: err.message || "Some error occurred while retrieving posts",
@@ -85,7 +87,7 @@ const update = (req, res) => {
           message: `Cannot update post with id=${postId}}. Maybe post was not found`,
         });
       } else {
-        res.send({ message: "Post was updated successfully" });
+        res.send({ message: "Post updated successfully" });
       }
     })
     .catch((err) => {
@@ -108,7 +110,7 @@ const deleteOne = (req, res) => {
         });
       } else {
         res.send({
-          message: "Post was deleted successfully",
+          message: "Post deleted successfully",
         });
       }
     })

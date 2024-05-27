@@ -50,7 +50,7 @@ const LoginForm = () => {
       });
 
       if (res?.status === 200 && res?.statusText === "OK") {
-        navigate("/home");
+        navigate("/posts/create");
       }
     }
   };

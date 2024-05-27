@@ -28,9 +28,12 @@ const App = () => {
           ServerFarm
         </Link>
         <div className="flex justify-between items-center flex-grow">
-          <ul>
+          <ul className="flex items-center gap-3">
             <li>
-              <Link to={"/home"}>Home</Link>
+              <Link to={"/posts"}>Posts</Link>
+            </li>
+            <li>
+              <Link to={"/posts/create"}>Create Post</Link>
             </li>
           </ul>
 
@@ -60,8 +63,13 @@ const App = () => {
           <Route exact path="/" element={<>Welcome</>} />
           <Route
             exact
-            path="/home"
+            path="/posts"
             element={isLoggedIn ? <>Home</> : <Navigate to="/login" />}
+          />
+          <Route
+            exact
+            path="/posts/create"
+            element={isLoggedIn ? <>Create Post</> : <Navigate to="/login" />}
           />
           <Route exact path="/login" element={<LoginForm />} />
           <Route exact path="/register" element={<RegisterForm />} />

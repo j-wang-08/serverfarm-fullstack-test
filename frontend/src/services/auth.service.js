@@ -3,12 +3,13 @@ import { toast } from "react-toastify";
 import { store } from "../store/auth";
 import { setToken, clearToken } from "../features/auth/authSlice";
 
-const API_URL =
-  process.env.REACT_APP_BACKEND_API_URL || "http://localhost:5000/api";
+const API_URL = `${
+  process.env.REACT_APP_BACKEND_API_URL || "http://localhost:5000/api"
+}/auth`;
 
 const register = ({ email, password, firstName, lastName }) => {
   return axios
-    .post(`${API_URL}/auth/register`, {
+    .post(`${API_URL}/register`, {
       email,
       password,
       firstName,
@@ -31,7 +32,7 @@ const register = ({ email, password, firstName, lastName }) => {
 
 const login = ({ email, password }) => {
   return axios
-    .post(`${API_URL}/auth/login`, {
+    .post(`${API_URL}/login`, {
       email,
       password,
     })
