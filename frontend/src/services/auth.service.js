@@ -34,8 +34,19 @@ const login = ({ email, password }) => {
       password,
     })
     .then((res) => {
+      console.log("res: ", res);
+      toast.success(res.data.message);
       if (res.data.token) {
         localStorage.setItem("token", res.data.token);
+      }
+      return res;
+    })
+    .catch((err) => {
+      console.log("error: ", err);
+      if (err.response.status === 401 || err.response.status === 403) {
+        toast.warn(err.response.data.message);
+      } else {
+        toast.error(err.message);
       }
     });
 };

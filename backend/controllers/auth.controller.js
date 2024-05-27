@@ -19,7 +19,7 @@ const login = async (req, res) => {
       if (result) {
         let payload = { user };
         let token = jwt.sign(payload, jwtOptions.secretOrKey);
-        return res.status(200).json({ message: "ok", token });
+        return res.status(200).json({ message: "User logged in successfully", token });
       } else {
         return res.status(403).json({ message: "Incorrect password" });
       }

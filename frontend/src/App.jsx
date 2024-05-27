@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import AuthService from "./services/auth.service";
 import RegisterForm from "./components/RegisterForm";
+import LoginForm from "./components/LoginForm";
 import { ToastContainer } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
@@ -58,7 +59,7 @@ const App = () => {
         <Routes>
           <Route exact path="/" element={<>Welcome</>} />
           <Route exact path="/home" element={<>Home</>} />
-          <Route exact path="/login" element={<>Login</>} />
+          <Route exact path="/login" element={<LoginForm />} />
           <Route exact path="/register" element={<RegisterForm />} />
         </Routes>
       </div>
