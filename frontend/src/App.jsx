@@ -18,18 +18,20 @@ const App = () => {
   };
 
   return (
-    <div>
-      <nav className="">
-        <Link to={"/"} className="">
-          ServerFarm
-        </Link>
-        <ul className="">
-          <li className="">
-            <Link to={"/home"} className="">
-              Home
-            </Link>
-          </li>
-        </ul>
+    <div className="">
+      <nav className="flex justify-between items-center flex-nowrap">
+        <div>
+          <Link to={"/"} className="">
+            ServerFarm
+          </Link>
+          <ul className="">
+            <li className="">
+              <Link to={"/home"} className="">
+                Home
+              </Link>
+            </li>
+          </ul>
+        </div>
         <ul className="">
           {isLoggedIn ? (
             <li className="">
@@ -44,7 +46,7 @@ const App = () => {
                   Login
                 </Link>
               </li>
-              <li className="nav-item">
+              <li className="">
                 <Link to={"/register"} className="">
                   Register
                 </Link>
