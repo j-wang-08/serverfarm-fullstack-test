@@ -3,6 +3,7 @@ import { Routes, Route, Link, Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { ToastContainer } from "react-toastify";
 import AuthService from "./services/auth.service";
+import Home from "./components/Home";
 import RegisterForm from "./components/RegisterForm";
 import LoginForm from "./components/LoginForm";
 import CreatePostForm from "./components/CreatePostForm";
@@ -61,7 +62,7 @@ const App = () => {
 
       <div className="">
         <Routes>
-          <Route exact path="/" element={<>Welcome</>} />
+          <Route exact path="/" element={<Home />} />
           <Route
             exact
             path="/posts"
