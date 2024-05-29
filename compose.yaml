@@ -131,6 +131,7 @@ services:
       start_period: 10s
   init-kafka:
     image: *kafka-image
+    container_name: init-kafka
     working_dir: /opt/bitnami/kafka/bin
     entrypoint: /bin/bash
     depends_on:
