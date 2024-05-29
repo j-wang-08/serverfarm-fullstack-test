@@ -24,11 +24,13 @@ const create = (req, res) => {
     .save()
     .then((data) => {
       // Send message to kafka
-      const payloads = {
-        topic,
-        messages: JSON.stringify(data),
-        partition: 0,
-      };
+      const payloads = [
+        {
+          topic,
+          messages: JSON.stringify(data),
+          partition: 0,
+        },
+      ];
 
       producer.send(payloads, (err, data) => {
         if (err) {
