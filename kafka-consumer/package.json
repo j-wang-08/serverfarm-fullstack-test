@@ -1,0 +1,11 @@
+{
+  "name": "kafka-consumer",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "kafka-node": "^5.0.0"
+  }
+}

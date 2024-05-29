@@ -14,7 +14,7 @@ FROM node:${NODE_VERSION}-alpine
 ENV NODE_ENV development
 
 
-WORKDIR /usr/src/backend
+WORKDIR /usr/src/kafka-consumer
 
 # Download dependencies as a separate step to take advantage of Docker's caching.
 # Leverage a cache mount to /root/.npm to speed up subsequent builds.
@@ -32,7 +32,7 @@ RUN --mount=type=bind,source=package.json,target=package.json \
 COPY . .
 
 # Expose the port that the application listens on.
-EXPOSE 5000
+# EXPOSE
 
 # Run the application.
 CMD npm start
