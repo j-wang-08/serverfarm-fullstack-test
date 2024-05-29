@@ -1,0 +1,140 @@
+# Comments are provided throughout this file to help you get started.
+# If you need more help, visit the Docker Compose reference guide at
+# https://docs.docker.com/go/compose-spec-reference/
+
+# Here the instructions define your application as a service called "server".
+# This service is built from the Dockerfile in the current directory.
+# You can add other services your application may depend on here, such as a
+# database or a cache. For examples, see the Awesome Compose repository:
+# https://github.com/docker/awesome-compose
+services:
+  backend:
+    build:
+      context: ./backend
+    restart: always
+    environment:
+      NODE_ENV: development
+      MYSQL_HOST: mysql
+      MYSQL_PORT: 3306
+      MYSQL_DATABASE: serverfarm_db
+      MYSQL_USERNAME: root
+      MYSQL_PASSWORD:
+      MONGODB_URL: mongodb://mongodb:27017
+      MONGODB_DATABASE: serverfarm_db
+      JWT_SECRET_KEY: serverfarm_secret
+      KAFKA_HOST: kafka
+      KAFKA_PORT: 9092
+      KAFKA_TOPIC: serverfarm-new-post
+    ports:
+      - 5000:5000
+    depends_on:
+      mysql:
+        condition: service_healthy
+      mongodb:
+        condition: service_healthy
+      kafka:
+        condition: service_started
+  frontend:
+    build:
+      context: ./frontend
+    restart: always
+    environment:
+      NODE_ENV: development
+    ports:
+      - 3000:3000
+    depends_on:
+      - backend
+  mysql:
+    image: mariadb:10.6.4-focal
+    # image: mysql:8.0.27
+    restart: always
+    command: '--default-authentication-plugin=mysql_native_password'
+    ports:
+      - 3306:3306
+    volumes:
+      - mysql-data:/var/lib/mysql
+    environment:
+      - MARIADB_DATABASE=serverfarm_db
+      - MARIADB_USER=root
+      - MARIADB_ALLOW_EMPTY_ROOT_PASSWORD=1
+      - MARIADB_ROOT_PASSWORD=
+      - MARIADB_PASSWORD=
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -u root --silent"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+  mongodb:
+    image: mongo:latest
+    restart: always
+    ports:
+      - 27017:27017
+    volumes:
+      - mongo-data:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=
+      - MONGO_INITDB_ROOT_PASSWORD=
+    healthcheck:
+      test: ["CMD-SHELL", "echo 'db.runCommand({ ping: 1 })' | mongosh --quiet"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+  zookeeper:
+    image: bitnami/zookeeper:latest
+    restart: always
+    ports:
+      - 2181:2181
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
+  kafka:
+    image: bitnami/kafka:latest
+    ports:
+      - 9092:9092
+    environment:
+      - KAFKA_CFG_NODE_ID=0
+      - KAFKA_CFG_PROCESS_ROLES=controller,broker
+      - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093
+      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
+      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka:9093
+      - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
+    depends_on:
+      - zookeeper
+volumes:
+  mysql-data:
+  mongo-data:
+
+    # The commented out section below is an example of how to define a PostgreSQL
+    # database that your application can use. `depends_on` tells Docker Compose to
+    # start the database before your application. The `db-data` volume persists the
+    # database data between container restarts. The `db-password` secret is used
+    # to set the database password. You must create `db/password.txt` and add
+    # a password of your choosing to it before running `docker-compose up`.
+    #     depends_on:
+    #       db:
+    #         condition: service_healthy
+    #   db:
+    #     image: postgres
+    #     restart: always
+    #     user: postgres
+    #     secrets:
+    #       - db-password
+    #     volumes:
+    #       - db-data:/var/lib/postgresql/data
+    #     environment:
+    #       - POSTGRES_DB=example
+    #       - POSTGRES_PASSWORD_FILE=/run/secrets/db-password
+    #     expose:
+    #       - 5432
+    #     healthcheck:
+    #       test: [ "CMD", "pg_isready" ]
+    #       interval: 10s
+    #       timeout: 5s
+    #       retries: 5
+    # volumes:
+    #   db-data:
+    # secrets:
+    #   db-password:
+    #     file: db/password.txt
+
