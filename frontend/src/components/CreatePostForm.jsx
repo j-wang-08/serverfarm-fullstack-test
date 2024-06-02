@@ -45,7 +45,7 @@ const CreatePostForm = () => {
         content: formState.content,
       });
 
-      if (res?.status === 200 && res?.statusText === "OK") {
+      if (res && res?.status === 200 && res?.statusText === "OK") {
         navigate("/posts");
       }
     }
@@ -56,10 +56,13 @@ const CreatePostForm = () => {
       <h2 className="text-2xl font-bold mb-5 text-center">Create New Post</h2>
       <form onSubmit={handleSubmit} noValidate>
         <div className="mb-4">
-          <label className="block text-gray-700">Title</label>
+          <label className="block text-gray-700" htmlFor="title">
+            Title
+          </label>
           <input
             type="text"
             name="title"
+            id="title"
             value={formState.title}
             onChange={handleChange}
             className={`mt-1 p-2 w-full border ${
@@ -71,9 +74,12 @@ const CreatePostForm = () => {
           )}
         </div>
         <div className="mb-4">
-          <label className="block text-gray-700">Content</label>
+          <label className="block text-gray-700" htmlFor="content">
+            Content
+          </label>
           <textarea
             name="content"
+            id="content"
             rows={5}
             value={formState.content}
             onChange={handleChange}

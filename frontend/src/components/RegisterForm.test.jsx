@@ -142,7 +142,7 @@ describe("RegisterForm", () => {
     });
   });
 
-  test("shows error message on failed login", async () => {
+  test("shows error message on failed register", async () => {
     AuthService.register.mockResolvedValue({
       status: 409,
       statusText: "Email already exists",
