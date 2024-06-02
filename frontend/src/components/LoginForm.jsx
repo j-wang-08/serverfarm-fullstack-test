@@ -49,7 +49,7 @@ const LoginForm = () => {
         password: formState.password,
       });
 
-      if (res?.status === 200 && res?.statusText === "OK") {
+      if (res && res?.status === 200 && res?.statusText === "OK") {
         navigate("/posts/create");
       }
     }
@@ -60,10 +60,13 @@ const LoginForm = () => {
       <h2 className="text-2xl font-bold mb-5 text-center">Login</h2>
       <form onSubmit={handleSubmit} noValidate>
         <div className="mb-4">
-          <label className="block text-gray-700">Email</label>
+          <label className="block text-gray-700" htmlFor="email">
+            Email
+          </label>
           <input
             type="email"
             name="email"
+            id="email"
             value={formState.email}
             onChange={handleChange}
             className={`mt-1 p-2 w-full border ${
@@ -75,10 +78,13 @@ const LoginForm = () => {
           )}
         </div>
         <div className="mb-4">
-          <label className="block text-gray-700">Password</label>
+          <label className="block text-gray-700" htmlFor="password">
+            Password
+          </label>
           <input
             type="password"
             name="password"
+            id="password"
             value={formState.password}
             onChange={handleChange}
             className={`mt-1 p-2 w-full border ${

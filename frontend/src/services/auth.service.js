@@ -22,7 +22,7 @@ const register = ({ email, password, firstName, lastName }) => {
     })
     .catch((err) => {
       console.log("error: ", err);
-      if (err.response.status === 409) {
+      if (err?.response?.status === 409) {
         toast.warn(err.response.data.message);
       } else {
         toast.error(err.message);
@@ -47,7 +47,7 @@ const login = ({ email, password }) => {
     })
     .catch((err) => {
       console.log("error: ", err);
-      if (err.response.status === 401 || err.response.status === 403) {
+      if (err?.response?.status === 401 || err?.response?.status === 403) {
         toast.warn(err.response.data.message);
       } else {
         toast.error(err.message);
