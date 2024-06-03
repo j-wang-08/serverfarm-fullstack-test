@@ -2,7 +2,7 @@ import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import { store } from "../store/auth";
-import RegisterForm from "./RegisterForm";
+import RegisterForm from "../components/RegisterForm";
 import AuthService from "../services/auth.service";
 
 jest.mock("../services/auth.service");

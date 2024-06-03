@@ -2,7 +2,7 @@ import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import { store } from "../store/auth";
-import CreatePostForm from "./CreatePostForm";
+import CreatePostForm from "../components/CreatePostForm";
 import PostService from "../services/post.service";
 
 jest.mock("../services/post.service");
