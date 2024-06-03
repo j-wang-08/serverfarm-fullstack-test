@@ -52,7 +52,7 @@ const CreatePostForm = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto my-10 p-5 bg-white rounded-lg shadow-md">
+    <div className="max-w-md mx-5 sm:mx-auto my-10 p-5 bg-white rounded-lg shadow-md">
       <h2 className="text-2xl font-bold mb-5 text-center">Create New Post</h2>
       <form onSubmit={handleSubmit} noValidate>
         <div className="mb-4">
