@@ -13,8 +13,6 @@ This project is a full-stack application designed to demonstrate the integration
 - [Usage](#usage)
 - [Services](#services)
 - [Environment Variables](#environment-variables)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Project Structure
 
@@ -37,7 +35,7 @@ This project is a full-stack application designed to demonstrate the integration
 ## Technologies Used
 
 - **Backend**: Express.js, Node.js, MySQL, MongoDB
-- **Frontend**: React.js, TailwindCSS
+- **Frontend**: React.js, TailwindCSS, Jest, Reat Testing Library
 - **Message Broker**: Apache Kafka
 - **Containerization**: Docker, Docker Compose
 
@@ -148,11 +146,3 @@ Once the services are up and running, you can access the application as follows:
 
 - `MONGO_INITDB_ROOT_USERNAME`: MongoDB root username.
 - `MONGO_INITDB_ROOT_PASSWORD`: MongoDB root password.
-
-## Contributing
-
-Contributions are welcome! Please follow the [contributing guidelines](CONTRIBUTING.md).
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
