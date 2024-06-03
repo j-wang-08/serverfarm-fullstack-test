@@ -32,7 +32,7 @@ const App = () => {
 
   return (
     <div>
-      <nav className="fixed top-0 left-0 w-screen max-w-screen-2xl mx-auto flex justify-between items-center gap-5 px-5 py-4 bg-gray-500 text-white">
+      <nav className="fixed top-0 left-0 2xl:left-1/2 2xl:-translate-x-1/2 w-screen 2xl:max-w-screen-2xl flex justify-between items-center gap-5 px-5 py-4 bg-gray-500 text-white">
         <Link to={"/"} className=" text-2xl font-bold">
           ServerFarm
         </Link>
