@@ -26,7 +26,7 @@ const App = () => {
 
   return (
     <div>
-      <nav className="flex items-center gap-5 px-5 py-4 bg-gray-500 text-white">
+      <nav className="max-w-screen-2xl mx-auto flex items-center gap-5 px-5 py-4 bg-gray-500 text-white">
         <Link to={"/"} className=" text-2xl font-bold">
           ServerFarm
         </Link>
@@ -61,7 +61,7 @@ const App = () => {
         </div>
       </nav>
 
-      <div>
+      <div className="max-w-screen-2xl mx-auto">
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route
